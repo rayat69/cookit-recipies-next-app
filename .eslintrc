@@ -1,0 +1,10 @@
+{
+  "extends": "next",
+  "plugins": [
+    // ...
+    "mui-unused-classes"
+  ],
+  "rules": {
+    "mui-unused-classes/unused-classes": 2
+  }
+}

@@ -1,0 +1,128 @@
+@use 'sass:map';
+
+$colors: (
+  code: hsl(226, 20%, 55%),
+  title: hsl(225, 21%, 46%),
+  message: hsl(226, 35%, 19%),
+  btn: hsl(225, 19%, 71%),
+  bg: hsl(220, 60%, 98%),
+  text-shadow: hsl(227, 49%, 91%, 44%),
+  circle: hsl(222, 76%, 97%),
+  circle-border: hsl(231, 43%, 90%),
+);
+
+$r: 9999px;
+
+@function clr($color) {
+  @return var(--color-error-#{$color});
+}
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  @each $name, $color in $colors {
+    --color-error-#{$name}: #{$color};
+  }
+
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: clr(bg);
+  @include flex;
+}
+
+.circle {
+  background-color: clr(circle);
+  border-radius: $r;
+  height: 95vh;
+  width: 95vh;
+  @include flex;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+  }
+
+  &::before {
+    width: 75%;
+    height: 75%;
+    background-color: clr(bg);
+    border-radius: $r;
+    transform: translate(-1%, 1%);
+  }
+
+  &::after {
+    width: 100%;
+    height: 100%;
+    border: clr(circle-border) 0.6px solid;
+    border-radius: $r;
+    background-color: transparent;
+    left: -5%;
+    top: 2%;
+  }
+}
+
+.card {
+  @include flex;
+  height: 15rem;
+  flex-direction: column;
+  width: 22.5rem;
+  z-index: 1;
+
+  & * {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  }
+
+  h1,
+  h4,
+  p {
+    text-align: center;
+  }
+}
+
+.code {
+  margin: 0;
+  color: clr(code);
+  font-weight: bold;
+  position: relative;
+  font-size: 6rem;
+  line-height: 1.167;
+  letter-spacing: -0.01562em;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0.75rem;
+    width: 100%;
+    border-radius: 50%;
+    background-color: clr(text-shadow);
+    z-index: -1;
+    transform: translateY(-100%);
+  }
+}
+
+.title {
+  margin: 0;
+  color: clr(title);
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  line-height: 1.235;
+  letter-spacing: 0.00735em;
+}
+
+.message {
+  margin: 0;
+  color: clr(message);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.01071em;
+}
