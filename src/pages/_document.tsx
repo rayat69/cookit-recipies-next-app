@@ -8,7 +8,7 @@ import Document, {
 import { ServerStyleSheets } from '@material-ui/core/styles'
 import { Children } from 'react'
 
-class MyDocument extends Document {
+export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage
@@ -51,5 +51,3 @@ class MyDocument extends Document {
     )
   }
 }
-
-export default MyDocument
